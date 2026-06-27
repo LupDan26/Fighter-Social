@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jab — Boxing &amp; MMA for Fans</title>
+  <meta name="description" content="Jab: fighter profiles, pound-for-pound rankings, schedules, promoters, latest news and fan comments for boxing and MMA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;850&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥊</text></svg>">
+  <link rel="stylesheet" href="styles.css?v=10">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#/">
+        <span class="logo">🥊</span>
+        <span>Ja<b>b</b></span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#/" data-route="">Home</a>
+        <a href="#/boxing" data-route="boxing">Boxing</a>
+        <a href="#/mma" data-route="mma">MMA</a>
+        <a href="#/promoters" data-route="promoters">Promoters</a>
+      </nav>
+      <span class="header-spacer"></span>
+      <div class="search-box">
+        <span class="s-icon">🔎</span>
+        <input id="headerSearch" type="text" placeholder="Search fighters…" autocomplete="off" aria-label="Search fighters">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      <button class="icon-btn" id="themeBtn" title="Toggle dark / light mode" aria-label="Toggle theme">🌙</button>
+      <button class="icon-btn menu-toggle" id="menuToggle" title="Menu" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main id="app"></main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-inner">
+        <div><span class="brand" style="font-size:1rem"><span class="logo" style="width:26px;height:26px;font-size:14px">🥊</span> Ja<b>b</b></span></div>
+        <div>Made for fans of boxing &amp; MMA · <span id="footYear"></span></div>
+      </div>
+      <p class="disclaimer">
+        Rankings reflect The Ring Magazine pound-for-pound Top 10 (boxing) and the official UFC men's
+        pound-for-pound Top 15 (MMA). Records, current titles and news reflect reporting gathered in late
+        June 2026 from third-party sources; some upcoming bouts are targeted matchups rather than signed
+        contracts. News headlines link out to external outlets. Comments you post are saved locally in your
+        own browser. Jab is an independent fan project and is not affiliated with The Ring, the UFC, any
+        promoter, or the news outlets linked here.
+      </p>
+    </div>
+  </footer>
+
+  <script src="data.js?v=10"></script>
+  <script src="app.js?v=10"></script>
+  <script>document.getElementById('footYear').textContent = new Date().getFullYear();</script>
+</body>
+</html>
