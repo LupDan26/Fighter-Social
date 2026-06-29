@@ -12,17 +12,17 @@
    ============================================================ */
 
 const PROMOTERS = [
-  { id: "top-rank", name: "Top Rank", sport: "boxing", founded: 1973, head: "Bob Arum", hq: "Las Vegas, Nevada, USA", site: "https://www.toprank.com",
+  { id: "top-rank", name: "Top Rank", sport: "boxing", founded: 1973, head: "Bob Arum", hq: "Las Vegas, Nevada, USA", site: "https://www.toprank.com", logo: "https://en.wikipedia.org/wiki/Special:FilePath/Top%20Rank%20logo.png?width=160",
     description: "One of boxing's most storied promoters, Top Rank has guided dozens of world champions since 1973 and broadcasts marquee cards on ESPN." },
-  { id: "matchroom", name: "Matchroom Boxing", sport: "boxing", founded: 1987, head: "Eddie Hearn", hq: "Brentwood, Essex, UK", site: "https://www.matchroomboxing.com",
+  { id: "matchroom", name: "Matchroom Boxing", sport: "boxing", founded: 1987, head: "Eddie Hearn", hq: "Brentwood, Essex, UK", site: "https://www.matchroomboxing.com", logo: "https://en.wikipedia.org/wiki/Special:FilePath/Matchroom%20logo.jpeg?width=160",
     description: "Led by Eddie Hearn, Matchroom stages major events across the UK, US and Middle East and partners with DAZN for global streaming." },
-  { id: "pbc", name: "Premier Boxing Champions", sport: "boxing", founded: 2015, head: "Al Haymon", hq: "Los Angeles, California, USA", site: "https://www.premierboxingchampions.com",
+  { id: "pbc", name: "Premier Boxing Champions", sport: "boxing", founded: 2015, head: "Al Haymon", hq: "Los Angeles, California, USA", site: "https://www.premierboxingchampions.com", logo: "https://www.premierboxingchampions.com/sites/all/themes/haymon/images/global/favicon-144x144.png",
     description: "Founded by manager-promoter Al Haymon, PBC delivers premium pay-per-view and Prime Video cards featuring many of America's biggest stars." },
-  { id: "golden-boy", name: "Golden Boy Promotions", sport: "boxing", founded: 2002, head: "Oscar De La Hoya", hq: "Los Angeles, California, USA", site: "https://www.goldenboy.com",
+  { id: "golden-boy", name: "Golden Boy Promotions", sport: "boxing", founded: 2002, head: "Oscar De La Hoya", hq: "Los Angeles, California, USA", site: "https://www.goldenboy.com", logo: "https://en.wikipedia.org/wiki/Special:FilePath/Golden%20Boy%20Promotions.gif?width=160",
     description: "Started by six-division champion Oscar De La Hoya, Golden Boy develops rising talent and stages a deep slate of fan-favorite cards." },
   { id: "ohashi", name: "Ohashi Boxing (Japan)", sport: "boxing", founded: 2004, head: "Hideyuki Ohashi", hq: "Yokohama, Japan", site: "https://www.ohashi-boxing.jp",
     description: "The Yokohama gym run by former world champion Hideyuki Ohashi, home to Japan's elite and the team behind Naoya Inoue." },
-  { id: "ufc", name: "UFC", sport: "mma", founded: 1993, head: "Dana White (President)", hq: "Las Vegas, Nevada, USA", site: "https://www.ufc.com",
+  { id: "ufc", name: "UFC", sport: "mma", founded: 1993, head: "Dana White (President)", hq: "Las Vegas, Nevada, USA", site: "https://www.ufc.com", logo: "https://en.wikipedia.org/wiki/Special:FilePath/UFC%20Logo.svg?width=160",
     description: "The Ultimate Fighting Championship is the world's premier mixed martial arts organization, owned by TKO Group, staging events globally and on ESPN/PPV." },
 ];
 
@@ -93,7 +93,7 @@ const FIGHTERS = [
   {
     id: "jesse-rodriguez", name: "Jesse Rodriguez", nickname: "Bam", sport: "boxing", flag: "🇺🇸", nationality: "USA", division: "Bantamweight",
     record: { w: 24, l: 0, d: 0, ko: 17 }, methods: { ko: 17, dec: 7 }, ringRank: 3,
-    image: null,
+    image: "https://images.ctfassets.net/lg76kxmf55ue/3HdsSOJy1d7GU3td8EvV1w/d6173ae84aa8ba12e12038c5e5af3cf1/JesseRodriguez.png?w=600&h=750&fit=fill&f=face&fm=jpg&q=80",
     recordUrl: "https://en.wikipedia.org/wiki/Jesse_Rodriguez_(boxer)",
     stance: "Southpaw", height: `5'5" (165 cm)`, reach: `65" (165 cm)`, age: 26, dob: "2000-02-04", hometown: "San Antonio, Texas, USA", debut: 2017, promoterId: "matchroom",
     currentTitles: ["WBA Bantamweight Champion"], standing: "",
@@ -122,7 +122,7 @@ const FIGHTERS = [
   },
   {
     id: "dmitry-bivol", name: "Dmitry Bivol", nickname: "", sport: "boxing", flag: "🇰🇬", nationality: "Kyrgyzstan", division: "Light Heavyweight",
-    record: { w: 25, l: 1, d: 0, ko: 12 }, methods: { ko: 12, dec: 13 }, ringRank: 4,
+    record: { w: 25, l: 1, d: 0, ko: 12 }, methods: { ko: 12, dec: 13 }, ringRank: 8,
     image: IMG + "c/c5/Dmitry_Bivol_in_2023.jpg/512px-Dmitry_Bivol_in_2023.jpg",
     recordUrl: "https://en.wikipedia.org/wiki/Dmitry_Bivol",
     stance: "Orthodox", height: `6'0" (183 cm)`, reach: `72" (183 cm)`, age: 35, dob: "1990-12-18", hometown: "Tokmok, Kyrgyzstan", debut: 2014, promoterId: "matchroom",
@@ -152,7 +152,7 @@ const FIGHTERS = [
   },
   {
     id: "artur-beterbiev", name: "Artur Beterbiev", nickname: "", sport: "boxing", flag: "🇨🇦", nationality: "Canada / Russia", division: "Light Heavyweight",
-    record: { w: 21, l: 1, d: 0, ko: 20 }, methods: { ko: 20, dec: 1 }, ringRank: 5,
+    record: { w: 21, l: 1, d: 0, ko: 20 }, methods: { ko: 20, dec: 1 }, ringRank: 9,
     image: IMG + "6/64/Artur_Beterbiev%2C_December_2019.jpg/512px-Artur_Beterbiev%2C_December_2019.jpg",
     recordUrl: "https://en.wikipedia.org/wiki/Artur_Beterbiev",
     stance: "Orthodox", height: `6'1" (185 cm)`, reach: `72" (183 cm)`, age: 41, dob: "1985-01-21", hometown: "Khasavyurt, Dagestan, Russia", debut: 2013, promoterId: "top-rank",
@@ -182,8 +182,8 @@ const FIGHTERS = [
   },
   {
     id: "junto-nakatani", name: "Junto Nakatani", nickname: "Big Bang", sport: "boxing", flag: "🇯🇵", nationality: "Japan", division: "Super Bantamweight",
-    record: { w: 32, l: 1, d: 0, ko: 24 }, methods: { ko: 24, dec: 8 }, ringRank: 6,
-    image: null,
+    record: { w: 32, l: 1, d: 0, ko: 24 }, methods: { ko: 24, dec: 8 }, ringRank: 7,
+    image: "https://images.ctfassets.net/lg76kxmf55ue/3RlBVTYMHnyqDQUM8jqGFH/041dd401e4c6e996c94bca91cc62b0d5/JuntoNakatani.png?w=600&h=750&fit=fill&f=face&fm=jpg&q=80",
     recordUrl: "https://en.wikipedia.org/wiki/Junto_Nakatani",
     stance: "Southpaw", height: `5'7" (170 cm)`, reach: `68" (173 cm)`, age: 28, dob: "1997-11-29", hometown: "Tokyo, Japan", debut: 2015, promoterId: "top-rank",
     currentTitles: [], standing: "Former Three-Division World Champion",
@@ -210,7 +210,7 @@ const FIGHTERS = [
   },
   {
     id: "shakur-stevenson", name: "Shakur Stevenson", nickname: "", sport: "boxing", flag: "🇺🇸", nationality: "USA", division: "Super Lightweight",
-    record: { w: 25, l: 0, d: 0, ko: 11 }, methods: { ko: 11, dec: 14 }, ringRank: 7,
+    record: { w: 25, l: 0, d: 0, ko: 11 }, methods: { ko: 11, dec: 14 }, ringRank: 5,
     image: IMG + "3/34/Jesus_vs_Stevenson_2016_Rio_8cr.jpg/512px-Jesus_vs_Stevenson_2016_Rio_8cr.jpg",
     recordUrl: "https://en.wikipedia.org/wiki/Shakur_Stevenson",
     stance: "Southpaw", height: `5'7" (170 cm)`, reach: `68" (173 cm)`, age: 28, dob: "1997-06-28", hometown: "Newark, New Jersey, USA", debut: 2017, promoterId: "top-rank",
@@ -240,7 +240,7 @@ const FIGHTERS = [
   },
   {
     id: "david-benavidez", name: "David Benavidez", nickname: "El Monstruo Mexicano", sport: "boxing", flag: "🇺🇸", nationality: "USA / Mexico", division: "Light Heavyweight",
-    record: { w: 32, l: 0, d: 0, ko: 26 }, methods: { ko: 26, dec: 6 }, ringRank: 8,
+    record: { w: 32, l: 0, d: 0, ko: 26 }, methods: { ko: 26, dec: 6 }, ringRank: 4,
     image: IMG + "8/8d/David_Benavidez_2024.png/512px-David_Benavidez_2024.png",
     recordUrl: "https://en.wikipedia.org/wiki/David_Benavidez",
     stance: "Orthodox", height: `6'2" (188 cm)`, reach: `74.5" (189 cm)`, age: 29, dob: "1996-12-17", hometown: "Phoenix, Arizona, USA", debut: 2013, promoterId: "pbc",
@@ -270,7 +270,7 @@ const FIGHTERS = [
   },
   {
     id: "devin-haney", name: "Devin Haney", nickname: "The Dream", sport: "boxing", flag: "🇺🇸", nationality: "USA", division: "Welterweight",
-    record: { w: 33, l: 0, d: 0, nc: 1, ko: 15 }, methods: { ko: 15, dec: 18 }, ringRank: 9,
+    record: { w: 33, l: 0, d: 0, nc: 1, ko: 15 }, methods: { ko: 15, dec: 18 }, ringRank: 6,
     image: IMG + "e/e0/Devin_Haney.jpg/512px-Devin_Haney.jpg",
     recordUrl: "https://en.wikipedia.org/wiki/Devin_Haney",
     stance: "Orthodox", height: `5'8" (173 cm)`, reach: `71" (180 cm)`, age: 27, dob: "1998-11-17", hometown: "Las Vegas, Nevada, USA", debut: 2015, promoterId: "matchroom",
@@ -301,7 +301,7 @@ const FIGHTERS = [
   {
     id: "oscar-collazo", name: "Oscar Collazo", nickname: "El Pupilo", sport: "boxing", flag: "🇵🇷", nationality: "Puerto Rico", division: "Minimumweight",
     record: { w: 14, l: 0, d: 0, ko: 11 }, methods: { ko: 11, dec: 3 }, ringRank: 10,
-    image: null,
+    image: "https://images.ctfassets.net/lg76kxmf55ue/5jgMr0qKlALucDBl9tLraS/15cc67144cac18fc877949d45e1a7abd/OscarCollazo.png?w=600&h=750&fit=fill&f=face&fm=jpg&q=80",
     recordUrl: "https://en.wikipedia.org/wiki/Oscar_Collazo_(boxer)",
     stance: "Southpaw", height: `5'4" (163 cm)`, reach: `64" (163 cm)`, age: 28, dob: "1997-04-17", hometown: "Salinas, Puerto Rico", debut: 2021, promoterId: "golden-boy",
     currentTitles: ["WBA & WBO Minimumweight Champion", "The Ring Minimumweight Champion"], standing: "",
@@ -473,7 +473,7 @@ const FIGHTERS = [
   {
     id: "tom-aspinall", name: "Tom Aspinall", nickname: "", sport: "mma", flag: "🇬🇧", nationality: "England", division: "Heavyweight",
     record: { w: 15, l: 3, d: 0, nc: 1, ko: 11, sub: 4, dec: 0 }, methods: { ko: 11, sub: 4, dec: 0 }, ufcRank: 6,
-    image: null,
+    image: "https://www.ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/ASPINALL_TOM_L_BELT_10-25.png?itok=wdUr8VUg",
     recordUrl: "https://en.wikipedia.org/wiki/Tom_Aspinall",
     stance: "Orthodox", height: `6'5" (196 cm)`, reach: `78" (198 cm)`, age: 33, dob: "1993-04-11", hometown: "Salford, England", debut: 2014, promoterId: "ufc",
     currentTitles: ["UFC Heavyweight Champion"], standing: "",
@@ -613,7 +613,7 @@ const FIGHTERS = [
   {
     id: "joshua-van", name: "Joshua Van", nickname: "The Fearless", sport: "mma", flag: "🇲🇲", nationality: "Myanmar / USA", division: "Flyweight",
     record: { w: 17, l: 2, d: 0, ko: 6, sub: 2, dec: 9 }, methods: { ko: 6, sub: 2, dec: 9 }, ufcRank: 11,
-    image: null,
+    image: "https://www.ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/VAN_JOSHUA_L_BELT_05-09.png?itok=emXQEdHo",
     recordUrl: "https://en.wikipedia.org/wiki/Joshua_Van",
     stance: "Orthodox", height: `5'6" (168 cm)`, reach: `68" (173 cm)`, age: 24, dob: "2001-09-12", hometown: "Houston, Texas, USA (born Myanmar)", debut: 2019, promoterId: "ufc",
     currentTitles: ["UFC Flyweight Champion"], standing: "",

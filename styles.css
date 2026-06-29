@@ -323,6 +323,7 @@ button { font-family: inherit; cursor: pointer; }
 
 .f-card .avatar { margin-bottom: 12px; }
 .avatar {
+  position: relative;
   width: 58px; height: 58px;
   border-radius: 50%;
   display: grid; place-items: center;
@@ -330,6 +331,13 @@ button { font-family: inherit; cursor: pointer; }
   letter-spacing: -.02em;
   box-shadow: var(--shadow-sm);
   flex-shrink: 0;
+  overflow: hidden;
+}
+.avatar .avatar-initials { position: relative; z-index: 0; }
+.avatar .avatar-img {
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
 }
 .f-card .f-name {
   font-weight: 750; font-size: 1.05rem; letter-spacing: -.01em;
@@ -477,12 +485,13 @@ button { font-family: inherit; cursor: pointer; }
 
 .title-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .title-list li {
-  display: flex; align-items: center; gap: 10px;
-  font-size: .92rem; padding: 9px 12px;
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .9rem; line-height: 1.4; padding: 10px 12px;
   background: var(--surface-2); border-radius: var(--radius-sm);
   border: 1px solid var(--border);
 }
-.title-list li .belt { color: var(--gold); }
+.title-list li .belt { color: var(--gold); flex-shrink: 0; line-height: 1.4; }
+.title-list li .belt-name { font-weight: 600; }
 
 /* fight schedule */
 .fight-row {
@@ -583,8 +592,14 @@ button { font-family: inherit; cursor: pointer; }
 }
 .promoter-card .pc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
 .promoter-card .pc-logo {
+  position: relative; overflow: hidden;
   width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
   font-weight: 850; color: #fff; font-size: 1.1rem; flex-shrink: 0;
+}
+.promoter-card .pc-logo .pc-logo-img {
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%;
+  object-fit: contain; background: #fff; padding: 5px;
 }
 .promoter-card h3 { margin: 0; font-size: 1.12rem; }
 .promoter-card .pc-sub { font-size: .8rem; color: var(--muted); }
@@ -766,9 +781,16 @@ button { font-family: inherit; cursor: pointer; }
   font-size: .74rem; font-weight: 800; letter-spacing: .06em;
   text-transform: uppercase; color: var(--muted);
 }
-.no-title { font-size: .9rem; color: var(--text-soft); display: flex; align-items: baseline; gap: 8px; }
-.no-title .nt-ico { color: var(--muted); font-size: .7rem; }
-.no-title .nt-sub { color: var(--muted); }
+.no-title {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 12px 14px;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.no-title .nt-ico { color: var(--muted); font-size: .6rem; margin-top: .45em; flex-shrink: 0; }
+.no-title .nt-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.no-title .nt-text b { font-size: .92rem; font-weight: 700; color: var(--text); }
+.no-title .nt-sub { font-size: .82rem; color: var(--muted); line-height: 1.4; }
 
 /* ---- main column ---- */
 .lb-main { min-width: 0; padding-top: 6px; }

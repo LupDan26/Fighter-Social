@@ -49,9 +49,13 @@
     const p = name.split(" ").filter(Boolean);
     return ((p[0] || "")[0] || "") + ((p[p.length - 1] || "")[0] || "");
   }
-  function avatar(name, id, cls) {
+  function avatar(name, id, cls, image) {
     const g = gradOf(id, name);
-    return `<div class="avatar ${cls || ""}" style="background:linear-gradient(135deg,${g[0]},${g[1]})">${initials(name).toUpperCase()}</div>`;
+    const src = image ? wmImage(image) : "";
+    const img = src
+      ? `<img class="avatar-img" src="${escapeHtml(src)}" alt="${escapeHtml(name)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`
+      : "";
+    return `<div class="avatar ${cls || ""}" style="background:linear-gradient(135deg,${g[0]},${g[1]})"><span class="avatar-initials">${initials(name).toUpperCase()}</span>${img}</div>`;
   }
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, (c) =>
@@ -85,10 +89,19 @@
     "alexandre-pantoja": "Alexandre Pantoja.png",
     "arman-tsarukyan": "Arman Tsarukyan 2024.png",
     "charles-oliveira": "Charles Oliveira UFC (51605790635).jpg",
+    // Fighters with no free Commons photo — full image URLs (UFC / The Ring CDNs).
+    "tom-aspinall": "https://www.ufc.com/images/styles/athlete_bio_full_body/s3/2025-10/ASPINALL_TOM_L_BELT_10-25.png?itok=wdUr8VUg",
+    "joshua-van": "https://www.ufc.com/images/styles/athlete_bio_full_body/s3/2026-05/VAN_JOSHUA_L_BELT_05-09.png?itok=emXQEdHo",
+    "jesse-rodriguez": "https://images.ctfassets.net/lg76kxmf55ue/3HdsSOJy1d7GU3td8EvV1w/d6173ae84aa8ba12e12038c5e5af3cf1/JesseRodriguez.png?w=1280&h=720&fit=fill&fm=jpg&q=80",
+    "junto-nakatani": "https://images.ctfassets.net/lg76kxmf55ue/3RlBVTYMHnyqDQUM8jqGFH/041dd401e4c6e996c94bca91cc62b0d5/JuntoNakatani.png?w=1280&h=720&fit=fill&fm=jpg&q=80",
+    "oscar-collazo": "https://images.ctfassets.net/lg76kxmf55ue/5jgMr0qKlALucDBl9tLraS/15cc67144cac18fc877949d45e1a7abd/OscarCollazo.png?w=1280&h=720&fit=fill&fm=jpg&q=80",
   };
   function backdropUrl(id) {
     const f = BACKDROPS[id];
-    return f ? "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(f) + "?width=1200" : "";
+    if (!f) return "";
+    // Allow either a bare Wikimedia Commons filename or a full image URL.
+    if (/^https?:\/\//.test(f)) return f;
+    return "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(f) + "?width=1200";
   }
   function recordStr(f) {
     const r = f.record;
@@ -137,7 +150,7 @@
     return `
       <a class="f-card" href="#/fighter/${f.id}">
         ${rank ? `<span class="rank-chip ${rankChipClass(rank)}">#${rank} P4P</span>` : ""}
-        ${avatar(f.name, f.id)}
+        ${avatar(f.name, f.id, "", f.image)}
         <div class="f-name">${escapeHtml(f.name)} <span title="${escapeHtml(f.nationality)}">${f.flag}</span></div>
         <div class="f-nick">${f.nickname ? '"' + escapeHtml(f.nickname) + '"' : "&nbsp;"}</div>
         <div class="f-div">${sportBadge(f.sport)} <span>${escapeHtml(f.division)}</span></div>
@@ -152,7 +165,7 @@
     return `
       <a class="rank-row" href="#/fighter/${f.id}">
         <div class="rnum ${rankChipClass(rank)}">${rank}</div>
-        ${avatar(f.name, f.id)}
+        ${avatar(f.name, f.id, "", f.image)}
         <div class="r-main">
           <div class="r-name">${escapeHtml(f.name)} <span title="${escapeHtml(f.nationality)}">${f.flag}</span></div>
           <div class="r-sub">${escapeHtml(f.division)}${f.nickname ? ' · "' + escapeHtml(f.nickname) + '"' : ""}</div>
@@ -168,7 +181,6 @@
   function viewHome() {
     const boxing = FIGHTERS.filter((f) => f.sport === "boxing").sort((a, b) => a.ringRank - b.ringRank);
     const mma = FIGHTERS.filter((f) => f.sport === "mma").sort((a, b) => a.ufcRank - b.ufcRank);
-    const featured = boxing.slice(0, 3).concat(mma.slice(0, 3));
     return `
       <section class="hero">
         <div class="wrap">
@@ -191,23 +203,20 @@
 
       <div class="wrap">
         <div class="section-head">
-          <span class="tag tag-boxing">The Ring</span>
-          <h2>Boxing — Pound&#8209;for&#8209;Pound Top 10</h2>
+          <span class="tag tag-boxing">Boxing</span>
+          <h2>Ring P4P Top 10</h2>
           <span class="grow"></span>
           <a class="more" href="#/boxing">View all →</a>
         </div>
         <div class="rank-list">${boxing.slice(0, 5).map(rankRow).join("")}</div>
 
         <div class="section-head">
-          <span class="tag tag-mma">UFC</span>
-          <h2>MMA — Pound&#8209;for&#8209;Pound Top 15</h2>
+          <span class="tag tag-mma">MMA</span>
+          <h2>UFC P4P Top 15</h2>
           <span class="grow"></span>
           <a class="more" href="#/mma">View all →</a>
         </div>
         <div class="rank-list">${mma.slice(0, 5).map(rankRow).join("")}</div>
-
-        <div class="section-head"><h2>Featured fighters</h2></div>
-        <div class="grid">${featured.map(fighterCard).join("")}</div>
       </div>`;
   }
 
@@ -222,7 +231,7 @@
       <div class="wrap">
         <a class="back-link" href="#/">← Home</a>
         <div class="section-head">
-          <span class="tag ${isBox ? "tag-boxing" : "tag-mma"}">${isBox ? "The Ring" : "UFC"}</span>
+          <span class="tag ${isBox ? "tag-boxing" : "tag-mma"}">${isBox ? "Boxing" : "MMA"}</span>
           <h2>${isBox ? "Boxing" : "MMA"} Pound&#8209;for&#8209;Pound</h2>
         </div>
         <p style="color:var(--text-soft);margin-top:-6px">${isBox
@@ -245,10 +254,13 @@
           ${PROMOTERS.map((p) => {
             const fs = FIGHTERS.filter((f) => f.promoterId === p.id);
             const g = gradOf(p.id);
+            const logoImg = p.logo
+              ? `<img class="pc-logo-img" src="${escapeHtml(p.logo)}" alt="${escapeHtml(p.name)} logo" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`
+              : "";
             return `
               <div class="promoter-card">
                 <div class="pc-head">
-                  <div class="pc-logo" style="background:linear-gradient(135deg,${g[0]},${g[1]})">${escapeHtml(initials(p.name).toUpperCase())}</div>
+                  <div class="pc-logo" style="background:linear-gradient(135deg,${g[0]},${g[1]})"><span class="pc-initials">${escapeHtml(initials(p.name).toUpperCase())}</span>${logoImg}</div>
                   <div>
                     <h3>${escapeHtml(p.name)}</h3>
                     <div class="pc-sub">${sportBadge(p.sport)} · Est. ${p.founded}</div>
@@ -318,8 +330,11 @@
   function titlesBlock(f) {
     const titles = f.currentTitles || [];
     const body = titles.length
-      ? `<ul class="title-list">${titles.map((t) => `<li><span class="belt">🏆</span> ${escapeHtml(t)}</li>`).join("")}</ul>`
-      : `<div class="no-title"><span class="nt-ico">●</span> No active titles${f.standing ? ` <span class="nt-sub">— ${escapeHtml(f.standing)}</span>` : ""}</div>`;
+      ? `<ul class="title-list">${titles.map((t) => `<li><span class="belt">🏆</span> <span class="belt-name">${escapeHtml(t)}</span></li>`).join("")}</ul>`
+      : `<div class="no-title">
+          <span class="nt-ico">●</span>
+          <div class="nt-text"><b>No active titles</b>${f.standing ? `<span class="nt-sub">${escapeHtml(f.standing)}</span>` : ""}</div>
+        </div>`;
     return `
       <div class="side-card">
         <h4 class="side-h">Current Titles</h4>
@@ -647,7 +662,7 @@
       drop.innerHTML = res.length
         ? res.map((f) => `
           <a class="sr-item" href="#/fighter/${f.id}">
-            ${avatar(f.name, f.id, "mini")}
+            ${avatar(f.name, f.id, "mini", f.image)}
             <div><div style="font-weight:650;font-size:.9rem">${escapeHtml(f.name)} ${f.flag}</div>
             <div class="sr-meta">${escapeHtml(f.division)} · ${f.sport === "boxing" ? "Boxing" : "MMA"}</div></div>
           </a>`).join("")
